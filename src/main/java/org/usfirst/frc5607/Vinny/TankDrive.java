@@ -1,21 +1,22 @@
 package org.usfirst.frc5607.Vinny;
+import org.usfirst.frc5607.Vinny.OI;
+import org.usfirst.frc5607.Vinny.Robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID;
 
 
 public class TankDrive
 {
-    TalonSRX leftMaster = new TalonSRX(1);
-    TalonSRX leftSlave1 = new TalonSRX(2);
-    VictorSPX leftSlave2 = new VictorSPX(3);
-    TalonSRX rightMaster = new TalonSRX(4);
-    TalonSRX rightSlave1 = new TalonSRX(5);
-    VictorSPX rightSlave2 = new VictorSPX(6);
+    private static OI oi = Robot.oi;
+    private TalonSRX leftMaster = new TalonSRX(1);
+    private TalonSRX leftSlave1 = new TalonSRX(2);
+    private VictorSPX leftSlave2 = new VictorSPX(3);
+    private TalonSRX rightMaster = new TalonSRX(4);
+    private TalonSRX rightSlave1 = new TalonSRX(5);
+    private VictorSPX rightSlave2 = new VictorSPX(6);
 
-    XboxController controller1 = new XboxController(0);
-    Double deadZone = 0.2;
+    private Double deadZone = 0.2;
 
     public TankDrive()
     {
@@ -28,8 +29,8 @@ public class TankDrive
     }
     public void Drive()
     {
-        double lJoystickSpeed = controller1.getY(GenericHID.Hand.kLeft);
-        double rJoystickSpeed = controller1.getY(GenericHID.Hand.kRight);
+        double lJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kLeft);
+        double rJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kRight);
         if(Math.abs(lJoystickSpeed) > deadZone) 
 		{
 			leftMaster.set(ControlMode.PercentOutput, lJoystickSpeed * -1);
