@@ -7,8 +7,6 @@ before_script:
 language:
   java
 
-jdk:
-  oraclejdk11
-
 script:
+  - export JAVA_HOME=/tmp/frc2019/jdk
   - ./gradlew build
