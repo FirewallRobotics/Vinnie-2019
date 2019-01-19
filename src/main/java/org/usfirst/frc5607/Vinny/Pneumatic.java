@@ -6,7 +6,7 @@ import org.usfirst.frc5607.Vinny.OI;
 public class Pneumatic
 {
     private static OI oi = Robot.oi;
-    private static Solenoid firstSolenoid = new Solenoid(7);
+    private static Solenoid firstSolenoid = new Solenoid(0);
 
     public Pneumatic()
     {
