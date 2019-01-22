@@ -15,10 +15,10 @@ public class Pneumatic
     public void start()
     {
 
-        if(oi.getXboxController1().getBButtonPressed()){
+        if(oi.getXboxController1().getBButton()){
             firstSolenoid.set(DoubleSolenoid.Value.kReverse);
         }
-        else if (oi.getXboxController1().getAButtonPressed()){
+        else if (oi.getXboxController1().getAButton()){
             firstSolenoid.set(DoubleSolenoid.Value.kForward);
         }
         else{
