@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
         oi = new OI();
         drivetrain = new Drivetrain();
         tDrive = new TankDrive();
-        sol = new Solenoid(10);     
+        sol = new Solenoid(7);     
         pneu = new Pneumatic();  
         SmartDashboard.putData(drivetrain);
         // Add commands to Autonomous Sendable Chooser
