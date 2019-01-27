@@ -10,3 +10,16 @@ language:
 script:
   - export JAVA_HOME=/tmp/frc2019/jdk
   - ./gradlew build
+
+# Generate javadocs and move to the docs folder for GitHub Pages support  
+after_success:
+  - ./gradlew javadoc
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master
+  local-dir: ./build/docs/
