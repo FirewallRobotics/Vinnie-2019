@@ -127,7 +127,5 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         tDrive.Drive();
         pneu.start();
-        double angle = pot.get();
-        SmartDashboard.putNumber("Angle", angle);
     }
 }
