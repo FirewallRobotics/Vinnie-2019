@@ -4,6 +4,7 @@ import org.usfirst.frc5607.Vinny.Robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.networktables.*;
 
 
 public class TankDrive
@@ -17,6 +18,29 @@ public class TankDrive
     private VictorSPX rightSlave2 = new VictorSPX(6);
 
     private Double deadZone = 0.2;
+
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("SmartDashboard");
+    NetworkTableEntry x = table.getEntry("X");
+    NetworkTableEntry y = table.getEntry("Y");
+    NetworkTableEntry radius = table.getEntry("Radius");
+
+    double MaxRadius = 60;
+    double MinRadius = 10;
+    double MaxOutR = 1;
+    double MinOutR = -1;
+    double NeutralOffSetR= 0.25;
+    double PGainR = 0.250;
+    double MaxX = 160;
+    double MinX = 10;
+    double Maxx = 1;
+    double Minx= -1;
+    double NeutralOffSetX= 0;
+    double PGainX = 0.25;
+    double ScaledX = 0;
+    double ScaledY = 0;
+    double ScaledRadius = 0;
+
 
     public TankDrive()
     {
@@ -49,5 +73,26 @@ public class TankDrive
 		{
 			rightMaster.set(ControlMode.PercentOutput, 0);
 		}
+    }
+    public void autonomous(){
+        double X = Math.round(x.getDouble(-1));
+        double Y = Math.round(y.getDouble(-1));
+        double Radius =  radius.getDouble(-1);
+        if(X == -1){
+         ScaledX = 0;
+         ScaledY = 0;
+         ScaledRadius = 0;
+        } else {
+        ScaledX =  PGainX * ((((Maxx - Minx)*((X- MinX)/(MaxX - MinX))) + Minx) -  NeutralOffSetX);
+        ScaledRadius =  PGainR * ((((MaxOutR - MinOutR)*((Radius - MinRadius)/(MaxRadius - MinRadius))) + MinOutR) -  NeutralOffSetR);
+        }
+        
+        Double LeftSpeed = -(ScaledRadius +  ScaledX) - 0.03;
+        Double RightSpeed = ScaledRadius -  ScaledX;
+        //System.out.println("ScaledX: "+ ScaledX + " ScaledRadius: " + ScaledRadius);
+        System.out.println("LeftSpeed: "+ LeftSpeed + " RightSpeed: " + RightSpeed);
+        leftMaster.set(ControlMode.PercentOutput,  -RightSpeed);
+        rightMaster.set(ControlMode.PercentOutput, -LeftSpeed);
+
     }
 }

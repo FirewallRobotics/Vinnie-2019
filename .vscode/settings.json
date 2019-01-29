@@ -10,5 +10,11 @@
     ".classpath": true,
     ".project": true
   },
-  "wpilib.online": true
+  "wpilib.online": true,
+  "gitflow4code.features": [
+    {
+      "name": "feature/visiontracking",
+      "base": "master"
+    }
+  ]
 }
