@@ -52,6 +52,7 @@ public class TankDrive
 		{
 			rightMaster.set(ControlMode.PercentOutput, 0);
         }
-        SmartDashboard.putNumber("Potentiometer", pot.getAnalogIn());
+        double analogIn = ((pot.getAnalogIn() - 7) / 907);
+        SmartDashboard.putNumber("Potentiometer", analogIn);
     }
 }
