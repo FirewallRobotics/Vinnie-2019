@@ -102,8 +102,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-
-
+        tDrive.autonomous();
         Scheduler.getInstance().run();
     }
 

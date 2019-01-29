@@ -19,27 +19,27 @@ public class TankDrive
 
     private Double deadZone = 0.2;
 
-    NetworkTableInstance inst = NetworkTableInstance.getDefault();
-    NetworkTable table = inst.getTable("SmartDashboard");
-    NetworkTableEntry x = table.getEntry("X");
-    NetworkTableEntry y = table.getEntry("Y");
-    NetworkTableEntry radius = table.getEntry("Radius");
+    private NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    private NetworkTable table = inst.getTable("SmartDashboard");
+    private NetworkTableEntry x = table.getEntry("X");
+    private NetworkTableEntry y = table.getEntry("Y");
+    private NetworkTableEntry radius = table.getEntry("Radius");
 
-    double MaxRadius = 60;
-    double MinRadius = 10;
-    double MaxOutR = 1;
-    double MinOutR = -1;
-    double NeutralOffSetR= 0.25;
-    double PGainR = 0.250;
-    double MaxX = 160;
-    double MinX = 10;
-    double Maxx = 1;
-    double Minx= -1;
-    double NeutralOffSetX= 0;
-    double PGainX = 0.25;
-    double ScaledX = 0;
-    double ScaledY = 0;
-    double ScaledRadius = 0;
+    private double MaxRadius = 60;
+    private double MinRadius = 10;
+    private double MaxOutR = 1;
+    private double MinOutR = -1;
+    private double NeutralOffSetR= 0.25;
+    private double PGainR = 0.250;
+    private double MaxX = 160;
+    private double MinX = 10;
+    private double Maxx = 1;
+    private double Minx= -1;
+    private double NeutralOffSetX= 0;
+    private double PGainX = 0.25;
+    private double ScaledX = 0;
+    private double ScaledY = 0;
+    private double ScaledRadius = 0;
 
 
     public TankDrive()
