@@ -1,6 +1,7 @@
-package org.usfirst.frc5607.Vinny;
+package org.usfirst.frc5607.Vinny.subsystems;
 import org.usfirst.frc5607.Vinny.Robot;
 import org.usfirst.frc5607.Vinny.OI;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
@@ -8,13 +9,14 @@ import com.ctre.phoenix.motorcontrol.can.*;
 public class Seesaw
 {
     private static OI oi = Robot.oi;
-    WPI_TalonSRX _talon = new WPI_TalonSRX(8);
-    public Seesaw()
+	WPI_TalonSRX _talon = new WPI_TalonSRX(8);
+	private static DoubleSolenoid secondSolenoid = Robot.secondSolenoid;
+	public Seesaw()
     {/* Config the sensor used for Primary PID and sensor direction */
         _talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
                                             0,
 				                            30);
-
+ 
 		/* Ensure sensor is positive when output is positive */
 		_talon.setSensorPhase(true);
 
@@ -47,12 +49,11 @@ public class Seesaw
 		 * Grab the 360 degree position of the MagEncoder's absolute
 		 * position, and intitally set the relative sensor to match.
 		 */
-		int absolutePosition = _talon.getSensorCollection().getPulseWidthPosition();
+		var absolutePosition = _talon.getSensorCollection().getPulseWidthPosition();
 
 		/* Mask out overflows, keep bottom 12 bits */
 		absolutePosition &= 0xFFF;
 		if (true) { absolutePosition *= -1; }
-		if (false) { absolutePosition *= -1; }
 		
 		/* Set the quadrature (relative) sensor to match absolute */
 		_talon.setSelectedSensorPosition(absolutePosition, 0, 30);
@@ -62,6 +63,7 @@ public class Seesaw
     {
 
         if(oi.getXboxController1().getXButtonPressed()){
+			_talon.set(ControlMode.Position, 0.50);
         }
     }
 }
