@@ -49,7 +49,7 @@ public class Seesaw
 		 * Grab the 360 degree position of the MagEncoder's absolute
 		 * position, and intitally set the relative sensor to match.
 		 */
-		var absolutePosition = _talon.getSensorCollection().getPulseWidthPosition();
+		int absolutePosition = _talon.getSensorCollection().getPulseWidthPosition();
 
 		/* Mask out overflows, keep bottom 12 bits */
 		absolutePosition &= 0xFFF;
