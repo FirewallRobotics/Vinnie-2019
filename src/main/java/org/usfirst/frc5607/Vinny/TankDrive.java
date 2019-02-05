@@ -2,8 +2,10 @@ package org.usfirst.frc5607.Vinny;
 import org.usfirst.frc5607.Vinny.OI;
 import org.usfirst.frc5607.Vinny.Robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class TankDrive
@@ -15,6 +17,7 @@ public class TankDrive
     private TalonSRX rightMaster = new TalonSRX(4);
     private TalonSRX rightSlave1 = new TalonSRX(5);
     private VictorSPX rightSlave2 = new VictorSPX(6);
+    private SensorCollection pot = leftMaster.getSensorCollection();
 
     private Double deadZone = 0.2;
 
@@ -48,6 +51,8 @@ public class TankDrive
 		else if(Math.abs(rJoystickSpeed) < deadZone) 
 		{
 			rightMaster.set(ControlMode.PercentOutput, 0);
-		}
+        }
+        double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
+        SmartDashboard.putNumber("Potentiometer", analogIn);
     }
 }
