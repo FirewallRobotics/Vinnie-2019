@@ -14,11 +14,6 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
-  "wpilib.online": true,
-  "gitflow4code.features": [
-    {
-      "name": "feature/Basket",
-      "base": "master"
-    }
+  "wpilib.online": true
   ]
 }
