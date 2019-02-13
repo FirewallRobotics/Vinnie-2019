@@ -10,6 +10,7 @@ public class Servotest
     public Servotest(){
         counter = 0;
         srvo = new Servo(0);
+        srvo.set(0);
     }
     public void start(){
         if (Robot.oi.getXboxController1().getYButtonPressed()){
