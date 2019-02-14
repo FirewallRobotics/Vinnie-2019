@@ -2,12 +2,12 @@ package org.usfirst.frc5607.Vinny.subsystems;
 import org.usfirst.frc5607.Vinny.Robot;
 import edu.wpi.first.wpilibj.Servo;
 
-public class Servotest
+public class Servos
 {
     private int counter;
     Servo srvo;
 
-    public Servotest(){
+    public Servos(){
         counter = 0;
         srvo = new Servo(1); 
         srvo.set(0);
