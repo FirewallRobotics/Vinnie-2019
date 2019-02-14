@@ -5,11 +5,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.GenericHID;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-=======
 import edu.wpi.first.networktables.*;
->>>>>>> added initial test for vision code
 
 
 public class TankDrive
@@ -81,6 +78,27 @@ public class TankDrive
         }
         double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
         SmartDashboard.putNumber("Potentiometer", analogIn);
+    }
+    public void autonomous(){
+        double X = Math.round(x.getDouble(-1));
+        double Y = Math.round(y.getDouble(-1));
+        double Radius =  radius.getDouble(-1);
+        if(X == -1){
+         ScaledX = 0;
+         ScaledY = 0;
+         ScaledRadius = 0;
+        } else {
+        ScaledX =  PGainX * ((((Maxx - Minx)*((X- MinX)/(MaxX - MinX))) + Minx) -  NeutralOffSetX);
+        ScaledRadius =  PGainR * ((((MaxOutR - MinOutR)*((Radius - MinRadius)/(MaxRadius - MinRadius))) + MinOutR) -  NeutralOffSetR);
+        }
+        
+        Double LeftSpeed = -(ScaledRadius +  ScaledX) - 0.03;
+        Double RightSpeed = ScaledRadius -  ScaledX;
+        //System.out.println("ScaledX: "+ ScaledX + " ScaledRadius: " + ScaledRadius);
+        System.out.println("LeftSpeed: "+ LeftSpeed + " RightSpeed: " + RightSpeed);
+        leftMaster.set(ControlMode.PercentOutput,  -RightSpeed);
+        rightMaster.set(ControlMode.PercentOutput, -LeftSpeed);
+
     }
     public void autonomous(){
         double X = Math.round(x.getDouble(-1));
