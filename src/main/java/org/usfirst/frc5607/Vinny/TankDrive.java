@@ -79,7 +79,7 @@ public class TankDrive
         double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
         SmartDashboard.putNumber("Potentiometer", analogIn);
     }
-    public void autonomous(){
+    public void autonomousOne(){
         double X = Math.round(x.getDouble(-1));
         double Y = Math.round(y.getDouble(-1));
         double Radius =  radius.getDouble(-1);
