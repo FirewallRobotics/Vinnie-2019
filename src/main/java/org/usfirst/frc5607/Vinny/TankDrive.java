@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.*;
 
 
 public class TankDrive
@@ -20,6 +21,29 @@ public class TankDrive
     private SensorCollection pot = leftMaster.getSensorCollection();
 
     private Double deadZone = 0.2;
+
+    private NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    private NetworkTable table = inst.getTable("SmartDashboard");
+    private NetworkTableEntry x = table.getEntry("X");
+    private NetworkTableEntry y = table.getEntry("Y");
+    private NetworkTableEntry radius = table.getEntry("Radius");
+
+    private double MaxRadius = 60;
+    private double MinRadius = 10;
+    private double MaxOutR = 1;
+    private double MinOutR = -1;
+    private double NeutralOffSetR= 0.25;
+    private double PGainR = 0.250;
+    private double MaxX = 160;
+    private double MinX = 10;
+    private double Maxx = 1;
+    private double Minx= -1;
+    private double NeutralOffSetX= 0;
+    private double PGainX = 0.25;
+    private double ScaledX = 0;
+    private double ScaledY = 0;
+    private double ScaledRadius = 0;
+
 
     public TankDrive()
     {
@@ -54,5 +78,27 @@ public class TankDrive
         }
         double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
         SmartDashboard.putNumber("Potentiometer", analogIn);
+    }
+   
+    public void autonomous(){
+        double X = Math.round(x.getDouble(-1));
+        double Y = Math.round(y.getDouble(-1));
+        double Radius =  radius.getDouble(-1);
+        if(X == -1){
+         ScaledX = 0;
+         ScaledY = 0;
+         ScaledRadius = 0;
+        } else {
+        ScaledX =  PGainX * ((((Maxx - Minx)*((X- MinX)/(MaxX - MinX))) + Minx) -  NeutralOffSetX);
+        ScaledRadius =  PGainR * ((((MaxOutR - MinOutR)*((Radius - MinRadius)/(MaxRadius - MinRadius))) + MinOutR) -  NeutralOffSetR);
+        }
+        
+        Double LeftSpeed = -(ScaledRadius +  ScaledX) - 0.03;
+        Double RightSpeed = ScaledRadius -  ScaledX;
+        //System.out.println("ScaledX: "+ ScaledX + " ScaledRadius: " + ScaledRadius);
+        System.out.println("LeftSpeed: "+ LeftSpeed + " RightSpeed: " + RightSpeed);
+        leftMaster.set(ControlMode.PercentOutput,  -RightSpeed);
+        rightMaster.set(ControlMode.PercentOutput, -LeftSpeed);
+
     }
 }
