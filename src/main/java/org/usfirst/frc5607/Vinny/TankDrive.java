@@ -22,6 +22,10 @@ public class TankDrive
 
     private Double deadZone = 0.2;
 
+    // Previous Joystick readings to help prevent jerkiness
+    private Double previousLeftReading = 0.0;
+    private Double previousRightReading = 0.0;
+
     private NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private NetworkTable table = inst.getTable("SmartDashboard");
     private NetworkTableEntry x = table.getEntry("X");
@@ -56,11 +60,21 @@ public class TankDrive
     }
     public void Drive()
     {
-        double lJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kLeft);
-        double rJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kRight);
+        Double lJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kLeft);
+        Double rJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kRight);
         if(Math.abs(lJoystickSpeed) > deadZone) 
 		{
-			leftMaster.set(ControlMode.PercentOutput, lJoystickSpeed * -1);
+            lJoystickSpeed = -(lJoystickSpeed * 0.40);
+            if (Math.abs(lJoystickSpeed - previousLeftReading) > 0.10) {
+                if (lJoystickSpeed > previousLeftReading) {
+                    lJoystickSpeed = previousLeftReading += 0.05;
+                }
+                else {
+                    lJoystickSpeed = previousLeftReading -= 0.05;
+                }
+            }
+            leftMaster.set(ControlMode.PercentOutput, lJoystickSpeed);
+            previousLeftReading = lJoystickSpeed;
 		}
 		else if(Math.abs(lJoystickSpeed) < deadZone)
 		{
@@ -70,14 +84,24 @@ public class TankDrive
 		//Sets Speed For Right Drive Motors
 		if(Math.abs(rJoystickSpeed) > deadZone) 
 		{
-			rightMaster.set(ControlMode.PercentOutput, rJoystickSpeed);
+            rJoystickSpeed = rJoystickSpeed * 0.40;
+            if (Math.abs(rJoystickSpeed - previousRightReading) > 0.10) {
+                if (rJoystickSpeed > previousRightReading) {
+                    rJoystickSpeed = previousRightReading += 0.05;
+                }
+                else {
+                    rJoystickSpeed = previousRightReading += 0.05;
+                }
+            }
+            rightMaster.set(ControlMode.PercentOutput, rJoystickSpeed);
+            previousRightReading += rJoystickSpeed;
 		}
 		else if(Math.abs(rJoystickSpeed) < deadZone) 
 		{
 			rightMaster.set(ControlMode.PercentOutput, 0);
         }
-        double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
-        SmartDashboard.putNumber("Potentiometer", analogIn);
+        //double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
+        //SmartDashboard.putNumber("Potentiometer", analogIn);
     }
    
     public void autonomous(){
