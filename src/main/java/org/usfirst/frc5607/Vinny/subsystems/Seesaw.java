@@ -2,17 +2,23 @@ package org.usfirst.frc5607.Vinny.subsystems;
 import org.usfirst.frc5607.Vinny.Robot;
 import org.usfirst.frc5607.Vinny.OI;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.GenericHID;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Seesaw
 {
     private static OI oi = Robot.oi;
 	WPI_TalonSRX _talon = new WPI_TalonSRX(8);
 	private static DoubleSolenoid secondSolenoid = Robot.secondSolenoid;
+	private int seesawState = 0;
+    private SensorCollection pot = _talon.getSensorCollection();
 	public Seesaw()
-    {/* Config the sensor used for Primary PID and sensor direction */
+    {
+		/* Config the sensor used for Primary PID and sensor direction */
         _talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
                                             0,
 				                            30);
@@ -50,6 +56,7 @@ public class Seesaw
 		 * position, and intitally set the relative sensor to match.
 		 */
 		int absolutePosition = _talon.getSensorCollection().getPulseWidthPosition();
+		//int absolutePosition = _talon.getSensorCollection().
 
 		/* Mask out overflows, keep bottom 12 bits */
 		absolutePosition &= 0xFFF;
@@ -61,9 +68,29 @@ public class Seesaw
     }
     public void start()
     {
-
+        if (oi.getXboxController1().getBumperPressed(GenericHID.Hand.kLeft)) {
+			if (seesawState == 0) {
+				_talon.set(ControlMode.PercentOutput, 0.20);
+				seesawState = 1;
+			}
+			else if (seesawState == 1) { 
+				_talon.set(ControlMode.PercentOutput, -0.20);
+				seesawState = 2;
+			}
+			else if (seesawState == 2) { 
+				_talon.set(ControlMode.PercentOutput, 0);
+				seesawState = 0;
+			}
+			else {
+				seesawState = 0;
+			}
+		}
+        //double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
+        double analogIn = pot.getAnalogIn();
+        SmartDashboard.putNumber("Potentiometer", analogIn);
+		/*
         if(oi.getXboxController1().getXButtonPressed()){
 			_talon.set(ControlMode.Position, 0.50);
-        }
+        }*/
     }
 }

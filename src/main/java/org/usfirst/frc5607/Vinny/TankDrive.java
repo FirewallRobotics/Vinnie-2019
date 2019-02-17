@@ -65,7 +65,7 @@ public class TankDrive
         if(Math.abs(lJoystickSpeed) > deadZone) 
 		{
             lJoystickSpeed = -(lJoystickSpeed * 0.40);
-            if (Math.abs(lJoystickSpeed - previousLeftReading) > 0.10) {
+            if (Math.abs(lJoystickSpeed - previousLeftReading) > 0.06) {
                 if (lJoystickSpeed > previousLeftReading) {
                     lJoystickSpeed = previousLeftReading += 0.05;
                 }
@@ -85,7 +85,7 @@ public class TankDrive
 		if(Math.abs(rJoystickSpeed) > deadZone) 
 		{
             rJoystickSpeed = rJoystickSpeed * 0.40;
-            if (Math.abs(rJoystickSpeed - previousRightReading) > 0.10) {
+            if (Math.abs(rJoystickSpeed - previousRightReading) > 0.06) {
                 if (rJoystickSpeed > previousRightReading) {
                     rJoystickSpeed = previousRightReading += 0.05;
                 }

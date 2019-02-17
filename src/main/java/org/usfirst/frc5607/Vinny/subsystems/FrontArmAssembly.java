@@ -2,6 +2,7 @@ package org.usfirst.frc5607.Vinny.subsystems;
 import org.usfirst.frc5607.Vinny.Robot;
 import org.usfirst.frc5607.Vinny.OI;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.GenericHID;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
@@ -64,7 +65,8 @@ public class FrontArmAssembly
     public void start()
     {
 
-        if(oi.getXboxController1().getYButtonPressed()){
+        //if(oi.getXboxController1().getYButtonPressed()){
+        if (Robot.oi.getXboxController1().getTriggerAxis(GenericHID.Hand.kRight) > 0.20) {
 			_talon.set(ControlMode.Position, 0.50);
 			_spark.set(0.25);
         }
