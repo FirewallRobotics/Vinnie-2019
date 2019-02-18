@@ -14,8 +14,8 @@ public class Servos
         srvo.set(0);
     }
     public void start(){
-        //if (Robot.oi.getXboxController1().getYButtonPressed()){
-        if (Robot.oi.getXboxController1().getTriggerAxis(GenericHID.Hand.kLeft) > 0.20) {
+        if (Robot.oi.getXboxController1().getYButtonPressed()){
+        //if (Robot.oi.getXboxController1().getTriggerAxis(GenericHID.Hand.kLeft) > 0.20) {
             counter++;
             if ((counter % 2) == 0){
                 srvo.set(0);

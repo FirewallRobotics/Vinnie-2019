@@ -15,7 +15,7 @@ public class BasketAssembly
 
     public void start()
     {
-        if (Robot.oi.getXboxController1().getBumperPressed(GenericHID.Hand.kRight)) {
+        /*if (Robot.oi.getXboxController1().getBumperPressed(GenericHID.Hand.kRight)) {
             counter++;
             if ((counter % 2) == 0){
                 dump();
@@ -23,7 +23,7 @@ public class BasketAssembly
             else{
                 raise();
             }
-        }
+        }*/
     }
     public void dump()
     {

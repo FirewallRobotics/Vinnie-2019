@@ -55,16 +55,16 @@ public class Seesaw
 		 * Grab the 360 degree position of the MagEncoder's absolute
 		 * position, and intitally set the relative sensor to match.
 		 */
-		int absolutePosition = _talon.getSensorCollection().getPulseWidthPosition();
+		//int absolutePosition = 840;
 		//int absolutePosition = _talon.getSensorCollection().
 
 		/* Mask out overflows, keep bottom 12 bits */
-		absolutePosition &= 0xFFF;
-		if (true) { absolutePosition *= -1; }
+		//absolutePosition &= 0xFFF;
+		//if (true) { absolutePosition *= -1; }
 		
 		/* Set the quadrature (relative) sensor to match absolute */
-		_talon.setSelectedSensorPosition(absolutePosition, 0, 30);
-
+		//_talon.setSelectedSensorPosition(absolutePosition, 0, 30);
+		//_talon.set(ControlMode.PercentOutput, 0);
     }
     public void start()
     {
@@ -74,11 +74,11 @@ public class Seesaw
 				seesawState = 1;
 			}
 			else if (seesawState == 1) { 
-				_talon.set(ControlMode.PercentOutput, -0.20);
+				_talon.set(ControlMode.PercentOutput, -0.05);
 				seesawState = 2;
 			}
 			else if (seesawState == 2) { 
-				_talon.set(ControlMode.PercentOutput, 0);
+	    		_talon.set(ControlMode.PercentOutput, 0);
 				seesawState = 0;
 			}
 			else {
@@ -92,5 +92,12 @@ public class Seesaw
         if(oi.getXboxController1().getXButtonPressed()){
 			_talon.set(ControlMode.Position, 0.50);
         }*/
-    }
+	}
+	
+	public void goToRocketHatchLow() {
+		if (oi.getXboxController1().getBumperPressed(GenericHID.Hand.kRight)) {
+			//_talon.setSelectedSensorPosition(840, 0, 30);
+			_talon.set(ControlMode.Position, 816);
+		}
+	}
 }

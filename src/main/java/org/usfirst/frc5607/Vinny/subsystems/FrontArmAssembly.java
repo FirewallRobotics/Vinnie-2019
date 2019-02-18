@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Spark;
 public class FrontArmAssembly
 {
     private static OI oi = Robot.oi;
-    WPI_TalonSRX _talon = new WPI_TalonSRX(9);
+    WPI_TalonSRX _talon = new WPI_TalonSRX(7);
     private static Spark _spark = new Spark(0);
 	private static DoubleSolenoid thirdSolenoid = Robot.thirdSolenoid;
 	public FrontArmAssembly()
@@ -55,20 +55,20 @@ public class FrontArmAssembly
 		int absolutePosition = _talon.getSensorCollection().getPulseWidthPosition();
 
 		/* Mask out overflows, keep bottom 12 bits */
-		absolutePosition &= 0xFFF;
-		if (true) { absolutePosition *= -1; }
+		//absolutePosition &= 0xFFF;
+		//if (true) { absolutePosition *= -1; }
 		
 		/* Set the quadrature (relative) sensor to match absolute */
-		_talon.setSelectedSensorPosition(absolutePosition, 0, 30);
+		//_talon.setSelectedSensorPosition(absolutePosition, 0, 30);
 
     }
     public void start()
     {
 
-        //if(oi.getXboxController1().getYButtonPressed()){
-        if (Robot.oi.getXboxController1().getTriggerAxis(GenericHID.Hand.kRight) > 0.20) {
-			_talon.set(ControlMode.Position, 0.50);
-			_spark.set(0.25);
+        if(oi.getXboxController1().getXButtonPressed()){
+        //if (Robot.oi.getXboxController1().getTriggerAxis(GenericHID.Hand.kRight) > 0.20) {
+		//	_talon.set(ControlMode.Position, 0.50);
+		//	_spark.set(0.25);
         }
     }
 }

@@ -73,6 +73,9 @@ public class Robot extends TimedRobot {
         thirdSolenoid = new DoubleSolenoid (4, 5);
         pneu = new Pneumatic();  
         srvoTest = new Servos();
+        basket = new BasketAssembly();
+        frontArm = new FrontArmAssembly();
+        seesaw = new Seesaw();
         SmartDashboard.putData(drivetrain);
 
         // Add commands to Autonomous Sendable Chooser
@@ -141,6 +144,7 @@ public class Robot extends TimedRobot {
         srvoTest.start();
         basket.start();
         frontArm.start();
-        seesaw.start();    
+        seesaw.start();  
+        seesaw.goToRocketHatchLow();  
     }
 }
