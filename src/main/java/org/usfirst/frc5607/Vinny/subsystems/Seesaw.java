@@ -35,15 +35,15 @@ public class Seesaw
 		/* Config the peak and nominal outputs, 12V means full */
 		_talon.configNominalOutputForward(0,30);
 		_talon.configNominalOutputReverse(0,30);
-		_talon.configPeakOutputForward(1,30);
-		_talon.configPeakOutputReverse(-1,30);
+		_talon.configPeakOutputForward(0.20,30);
+		_talon.configPeakOutputReverse(-0.05,30);
 
 		/**
 		 * Config the allowable closed-loop error, Closed-Loop output will be
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		_talon.configAllowableClosedloopError(0, 0, 30);
+		_talon.configAllowableClosedloopError(0, 1, 30);
 
 		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. */
 		_talon.config_kF(0, 0.0, 30);
@@ -97,7 +97,7 @@ public class Seesaw
 	public void goToRocketHatchLow() {
 		if (oi.getXboxController1().getBumperPressed(GenericHID.Hand.kRight)) {
 			//_talon.setSelectedSensorPosition(840, 0, 30);
-			_talon.set(ControlMode.Position, 816);
+			_talon.set(ControlMode.Position, 824);
 		}
 	}
 }
