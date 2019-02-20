@@ -140,11 +140,10 @@ public class Robot extends TimedRobot {
     private void commonPeriodic() {
         Scheduler.getInstance().run();
         tDrive.Drive();
-        pneu.start();
+        //pneu.start();
         srvoTest.start();
         basket.start();
         frontArm.start();
-        seesaw.start();  
-        seesaw.goToRocketHatchLow();  
+        seesaw.start();
     }
 }

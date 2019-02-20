@@ -14,6 +14,9 @@ public class FrontArmAssembly
     WPI_TalonSRX _talon = new WPI_TalonSRX(7);
     private static Spark _spark = new Spark(0);
 	private static DoubleSolenoid thirdSolenoid = Robot.thirdSolenoid;
+	private byte startcounter = 0;
+	private byte backcounter = 0;
+	private byte bcounter = 0;
 	public FrontArmAssembly()
     {/* Config the sensor used for Primary PID and sensor direction */
         _talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
@@ -64,11 +67,35 @@ public class FrontArmAssembly
     }
     public void start()
     {
-
-        if(oi.getXboxController1().getXButtonPressed()){
-        //if (Robot.oi.getXboxController1().getTriggerAxis(GenericHID.Hand.kRight) > 0.20) {
-		//	_talon.set(ControlMode.Position, 0.50);
-		//	_spark.set(0.25);
-        }
+        if(oi.getXboxController1().getStartButtonPressed()){
+			startcounter++;
+			if(startcounter % 2 == 0){
+				_talon.set(ControlMode.PercentOutput, .30);
+				startcounter = 0;
+			}	
+			else if (startcounter % 2 == 1){
+				_talon.set(ControlMode.PercentOutput, 0);
+			}
+		}
+		if(oi.getXboxController1().getBackButtonPressed()){
+			backcounter++;
+			if(backcounter % 2 == 0){
+				_talon.set(ControlMode.PercentOutput, -.30);
+				backcounter = 0;
+			}	
+			else if (backcounter % 2 == 1){
+				_talon.set(ControlMode.PercentOutput, 0);
+			}
+		}
+		if (oi.getXboxController1().getBButtonPressed()){
+			bcounter++;
+			if(bcounter % 2 == 0){
+				bcounter = 0;
+				_spark.set(.2);
+			}
+			else if (bcounter % 2 == 1){
+				_spark.set(0);
+			}
+		}
     }
 }

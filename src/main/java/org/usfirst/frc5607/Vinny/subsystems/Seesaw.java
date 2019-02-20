@@ -15,7 +15,8 @@ public class Seesaw
 	WPI_TalonSRX _talon = new WPI_TalonSRX(8);
 	private static DoubleSolenoid secondSolenoid = Robot.secondSolenoid;
 	private int seesawState = 0;
-    private SensorCollection pot = _talon.getSensorCollection();
+	private SensorCollection pot = _talon.getSensorCollection();
+	private byte counter = 0;
 	public Seesaw()
     {
 		/* Config the sensor used for Primary PID and sensor direction */
@@ -47,7 +48,7 @@ public class Seesaw
 
 		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. */
 		_talon.config_kF(0, 0.0, 30);
-		_talon.config_kP(0, 0.15, 30);
+		_talon.config_kP(0, 1, 30);
 		_talon.config_kI(0, 0.0, 30);
 		_talon.config_kD(0, 1.0, 30);
 
@@ -91,13 +92,23 @@ public class Seesaw
 		/*
         if(oi.getXboxController1().getXButtonPressed()){
 			_talon.set(ControlMode.Position, 0.50);
-        }*/
+		}*/
+		if (oi.getXboxController1().getBumper(GenericHID.Hand.kRight)) {
+			goToPosition(824);
+		}
 	}
 	
-	public void goToRocketHatchLow() {
-		if (oi.getXboxController1().getBumperPressed(GenericHID.Hand.kRight)) {
-			//_talon.setSelectedSensorPosition(840, 0, 30);
-			_talon.set(ControlMode.Position, 824);
+	public void goToPosition(int pos) {
+		//_talon.setSelectedSensorPosition(840, 0, 30);
+		int potvalue = Math.round(pot.getAnalogIn());
+		if (potvalue < pos){
+			_talon.set(ControlMode.PercentOutput, 0.2);
+		}
+		else if (potvalue > pos){
+			_talon.set(ControlMode.PercentOutput, -0.05);
+		}
+		else {
+			_talon.set(ControlMode.PercentOutput, 0);
 		}
 	}
 }

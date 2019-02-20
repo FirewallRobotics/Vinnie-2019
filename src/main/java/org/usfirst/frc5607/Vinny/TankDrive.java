@@ -90,11 +90,11 @@ public class TankDrive
                     rJoystickSpeed = previousRightReading += 0.05;
                 }
                 else {
-                    rJoystickSpeed = previousRightReading += 0.05;
+                    rJoystickSpeed = previousRightReading -= 0.05;
                 }
             }
             rightMaster.set(ControlMode.PercentOutput, rJoystickSpeed);
-            previousRightReading += rJoystickSpeed;
+            previousRightReading = rJoystickSpeed;
 		}
 		else if(Math.abs(rJoystickSpeed) < deadZone) 
 		{
