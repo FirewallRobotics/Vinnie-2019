@@ -14,5 +14,11 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
-  "wpilib.online": true
+  "wpilib.online": true,
+  "gitflow4code.features": [
+    {
+      "name": "feature/Factory_Default_Talons_and_Victors",
+      "base": "master"
+    }
+  ]
 }

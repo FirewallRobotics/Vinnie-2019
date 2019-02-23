@@ -27,7 +27,10 @@ public class Seesaw
 		/* Ensure sensor is positive when output is positive */
 		_talon.setSensorPhase(true);
 		_talon.setNeutralMode(NeutralMode.Brake);
-
+		_talon.configForwardSoftLimitThreshold(824);
+		_talon.configForwardSoftLimitEnable(true);
+		_talon.configReverseSoftLimitThreshold(812);
+		_talon.configReverseSoftLimitEnable(true);
 		/**
 		 * Set based on what direction you want forward/positive to be.
 		 * This does not affect sensor phase. 
