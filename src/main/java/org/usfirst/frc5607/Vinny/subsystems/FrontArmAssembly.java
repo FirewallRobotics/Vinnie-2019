@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.Spark;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class FrontArmAssembly
 {
     private static OI oi = Robot.oi;
@@ -21,7 +21,8 @@ public class FrontArmAssembly
  
 		/* Ensure sensor is positive when output is positive */
 		_talon.setSensorPhase(true);
-
+		_talon.configFactoryDefault();
+		_talon.setNeutralMode(NeutralMode.Brake);
 		/**
 		 * Set based on what direction you want forward/positive to be.
 		 * This does not affect sensor phase. 
