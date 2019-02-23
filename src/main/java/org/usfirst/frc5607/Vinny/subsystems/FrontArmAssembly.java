@@ -90,7 +90,7 @@ public class FrontArmAssembly
 			sparkcounter++;
 			if(sparkcounter % 2 == 0){
 				sparkcounter = 0;
-				_spark.setSpeed(.2);
+				_spark.setSpeed(1);
 			}
 			else if (sparkcounter % 2 == 1){
 				_spark.setSpeed(0);
