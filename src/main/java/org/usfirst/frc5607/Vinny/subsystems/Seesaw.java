@@ -26,6 +26,7 @@ public class Seesaw
  
 		/* Ensure sensor is positive when output is positive */
 		_talon.setSensorPhase(true);
+		_talon.configFactoryDefault();
 		_talon.setNeutralMode(NeutralMode.Brake);
 		//Make sure seesaw will not break gear when it goes to 824 or 812
 		_talon.configForwardSoftLimitThreshold(824);
