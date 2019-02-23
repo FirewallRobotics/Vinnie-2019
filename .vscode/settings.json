@@ -14,5 +14,5 @@
     "**/.settings": true,
     "**/.factorypath": true
   },
-  "wpilib.online": true,
+  "wpilib.online": true
     }
