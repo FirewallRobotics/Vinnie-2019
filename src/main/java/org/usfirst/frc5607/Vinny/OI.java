@@ -12,13 +12,8 @@
 package org.usfirst.frc5607.Vinny;
 
 //import org.usfirst.frc5607.Vinny.commands.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
-import org.usfirst.frc5607.Vinny.subsystems.*;
 
 
 /**
