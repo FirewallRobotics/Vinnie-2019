@@ -12,7 +12,6 @@ public class FrontArmAssembly
     private static OI oi = Robot.oi;
     WPI_TalonSRX _talon = new WPI_TalonSRX(9);
     private static Spark _spark = new Spark(0);
-	private static DoubleSolenoid thirdSolenoid = Robot.thirdSolenoid;
 	public FrontArmAssembly()
     {/* Config the sensor used for Primary PID and sensor direction */
         _talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 

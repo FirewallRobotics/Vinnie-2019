@@ -14,7 +14,6 @@ public class Seesaw
 {
     private static OI oi = Robot.oi;
 	WPI_TalonSRX _talon = new WPI_TalonSRX(8);
-	private static DoubleSolenoid secondSolenoid = Robot.secondSolenoid;
 	private byte seesawState = 0;
 	private SensorCollection pot = _talon.getSensorCollection();
 	private Double deadzone = 0.15;
@@ -107,14 +106,16 @@ public class Seesaw
 			SmartDashboard.putNumber("seesaw state", seesawState);
 		}
 		else{
-			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * 0.2);
+			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -0.2);
+			seesawState = 0;
 		}
+		SmartDashboard.putNumber("pot value", Math.abs(pot.getAnalogIn()));
 	}
 	
 	public void goToPosition(int pos) {
 		//_talon.setSelectedSensorPosition(840, 0, 30);\
 		SmartDashboard.putNumber("Target Pos", pos);
-		int potvalue = Math.round(pot.getAnalogIn());
+		int potvalue = Math.abs(Math.round(pot.getAnalogIn()));
 		if (potvalue < pos){
 			_talon.set(ControlMode.PercentOutput, 0.1);
 		}
