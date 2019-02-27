@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.*;
-
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class TankDrive
 {
@@ -19,7 +19,7 @@ public class TankDrive
     private TalonSRX rightSlave1 = new TalonSRX(5);
     private VictorSPX rightSlave2 = new VictorSPX(6);
     private SensorCollection pot = leftMaster.getSensorCollection();
-
+    
     private Double deadZone = 0.2;
 
     // Previous Joystick readings to help prevent jerkiness
@@ -50,7 +50,10 @@ public class TankDrive
 
 
     public TankDrive()
-    {
+    {   leftMaster.configFactoryDefault();
+        leftMaster.setNeutralMode(NeutralMode.Brake);
+        rightMaster.configFactoryDefault();
+        rightMaster.setNeutralMode(NeutralMode.Brake);
         leftSlave1.follow(leftMaster);
         leftSlave2.follow(leftMaster);
         rightSlave1.follow(rightMaster);

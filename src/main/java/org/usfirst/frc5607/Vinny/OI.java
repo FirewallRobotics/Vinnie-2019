@@ -60,7 +60,6 @@ public class OI {
 
         xboxController1 = new XboxController(0);
         xboxController2 = new XboxController(1);
-         
     }
 
     //First Controller
