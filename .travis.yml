@@ -1,5 +1,5 @@
 before_script:
-  - wget   --quiet https://github.com/wpilibsuite/allwpilib/releases/download/v2019.2.1/WPILib_Linux-2019.2.1.tar.gz -O /tmp/wpilib.tar.gz
+  - wget   --quiet https://github.com/wpilibsuite/allwpilib/releases/download/v2019.4.1/WPILib_Linux-2019.4.1.tar.gz -O /tmp/wpilib.tar.gz
   - mkdir /tmp/frc2019
   - tar -zxf /tmp/wpilib.tar.gz -C /tmp/frc2019
   - ls -l /tmp/frc2019
