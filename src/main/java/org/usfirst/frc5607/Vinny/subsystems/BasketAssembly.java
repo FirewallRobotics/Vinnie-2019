@@ -20,6 +20,14 @@ public class BasketAssembly
     {
         basketSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
+    public void start(){
+        if (Robot.oi.getBasketDump()){
+            dump();
+        }
+        if (Robot.oi.getBasketRaise()){
+            raise();
+        }
+    }
 }
 
 

@@ -134,7 +134,6 @@ public class Robot extends TimedRobot {
     private void commonPeriodic() {
         Scheduler.getInstance().run();
         tDrive.Drive();
-        pneu.start();
         srvoTest.start();
     }
 }

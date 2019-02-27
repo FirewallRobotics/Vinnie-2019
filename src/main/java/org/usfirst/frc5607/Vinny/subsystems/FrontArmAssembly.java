@@ -63,10 +63,23 @@ public class FrontArmAssembly
     }
     public void start()
     {
-
-        if(oi.getXboxController1().getYButtonPressed()){
-			_talon.set(ControlMode.Position, 0.50);
-			_spark.set(0.25);
-        }
+		if(Robot.oi.getFrontArmLower()){
+			_talon.set(ControlMode.PercentOutput, .5);
+		}
+		else{
+			_talon.set(ControlMode.PercentOutput, 0);
+		}
+		if(Robot.oi.getFrontArmRaise()){
+			_talon.set(ControlMode.PercentOutput, -0.5);
+		}
+		else{
+			_talon.set(ControlMode.PercentOutput, 0);
+		}
+		if(Robot.oi.getFrontArmSpin()){
+			_spark.setSpeed(0.5);
+		}
+		else{
+			_spark.setSpeed(0);
+		}
     }
 }
