@@ -9,13 +9,9 @@ import edu.wpi.first.wpilibj.Spark;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class FrontArmAssembly
 {
-    private static OI oi = Robot.oi;
-    WPI_TalonSRX _talon = new WPI_TalonSRX(9);
-    private static Spark _spark = new Spark(0);
-	private static DoubleSolenoid thirdSolenoid = Robot.thirdSolenoid;
-	private byte startcounter = 0;
-	private byte backcounter = 0;
-	private byte sparkcounter = 0;
+  private static OI oi = Robot.oi;
+  WPI_TalonSRX _talon = new WPI_TalonSRX(9);
+  private static Spark _spark = new Spark(0);
 	public FrontArmAssembly()
     {/* Config the sensor used for Primary PID and sensor direction */
         //_talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
@@ -67,35 +63,23 @@ public class FrontArmAssembly
     }
     public void start()
     {
-		if(oi.getXboxController1().getStartButtonPressed()){
-			startcounter++;
-			if(startcounter % 2 == 0){
-				_talon.set(ControlMode.PercentOutput, .30);
-				startcounter = 0;
-			}	
-			else if (startcounter % 2 == 1){
-				_talon.set(ControlMode.PercentOutput, 0);
-			}
+		if(Robot.oi.getFrontArmLower()){
+			_talon.set(ControlMode.PercentOutput, .5);
 		}
-		if(oi.getXboxController1().getBackButtonPressed()){
-			backcounter++;
-			if(backcounter % 2 == 0){
-				_talon.set(ControlMode.PercentOutput, -.30);
-				backcounter = 0;
-			}	
-			else if (backcounter % 2 == 1){
-				_talon.set(ControlMode.PercentOutput, 0);
-			}
+		else{
+			_talon.set(ControlMode.PercentOutput, 0);
 		}
-		if (oi.getXboxController1().getBButtonPressed()){
-			sparkcounter++;
-			if(sparkcounter % 2 == 0){
-				sparkcounter = 0;
-				_spark.setSpeed(1);
-			}
-			else if (sparkcounter % 2 == 1){
-				_spark.setSpeed(0);
-			}
-        }
+		if(Robot.oi.getFrontArmRaise()){
+			_talon.set(ControlMode.PercentOutput, -0.5);
+		}
+		else{
+			_talon.set(ControlMode.PercentOutput, 0);
+		}
+		if(Robot.oi.getFrontArmSpin()){
+			_spark.setSpeed(0.5);
+		}
+		else{
+			_spark.setSpeed(0);
+		}
     }
 }

@@ -14,9 +14,9 @@ public class Seesaw
 {
     private static OI oi = Robot.oi;
 	WPI_TalonSRX _talon = new WPI_TalonSRX(8);
-	private static DoubleSolenoid secondSolenoid = Robot.secondSolenoid;
 	private byte seesawState = 0;
 	private SensorCollection pot = _talon.getSensorCollection();
+	private Double deadzone = 0.15;
 	public Seesaw()
     {
 		/* Config the sensor used for Primary PID and sensor direction */
@@ -75,33 +75,52 @@ public class Seesaw
     }
     public void start()
     {
-        if (oi.getXboxController1().getBumperReleased(GenericHID.Hand.kRight)) {
-			seesawState++;
+        if(Math.abs(Robot.oi.getJoySpeed())< deadzone){
+
+			if(Robot.oi.getLowerHatch()){
+				seesawState = 1;
+			}
+			if(Robot.oi.getHighHatch()){
+				seesawState = 2;
+			}
+			if(Robot.oi.getCSCargoDeploy()){
+				seesawState = 3;
+			}
+			if(Robot.oi.getRSLowerCargo()){
+				seesawState = 2;
+			}
+			if(Robot.oi.getRSHigherCargo()){
+				seesawState = 4;
+			}
+
+			if (seesawState == 0) {
+				_talon.set(ControlMode.PercentOutput, 0);
+			}
+			else if (seesawState == 1) { 
+				goToPosition(817);
+			}
+			else if (seesawState == 2) { 
+				goToPosition(824);
+			}
+			else if (seesawState == 3){
+				goToPosition(818);
+			}
+			else if (seesawState == 4){
+				goToPosition(812);
+			}
+			SmartDashboard.putNumber("seesaw state", seesawState);
 		}
-		if ((seesawState % 3) ==0) {
-			_talon.set(ControlMode.PercentOutput, 0);
+		else{
+			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -0.2);
 			seesawState = 0;
 		}
-		else if ((seesawState % 3) == 1) { 
-			goToPosition(823);
-		}
-		else if ((seesawState % 3) == 2) { 
-			goToPosition(818);
-		}
-		double analogIn = pot.getAnalogIn();
-		SmartDashboard.putNumber("Potentiometer", analogIn);
-		SmartDashboard.putNumber("SeesawState", seesawState);
-        //double analogIn = ((pot.getAnalogIn() - 7) / 9.07);
-		/*
-        if(oi.getXboxController1().getXButtonPressed()){
-			_talon.set(ControlMode.Position, 0.50);
-		}*/
+		SmartDashboard.putNumber("pot value", Math.abs(pot.getAnalogIn()));
 	}
 	
 	public void goToPosition(int pos) {
 		//_talon.setSelectedSensorPosition(840, 0, 30);\
 		SmartDashboard.putNumber("Target Pos", pos);
-		int potvalue = Math.round(pot.getAnalogIn());
+		int potvalue = Math.abs(Math.round(pot.getAnalogIn()));
 		if (potvalue < pos){
 			_talon.set(ControlMode.PercentOutput, 0.1);
 		}

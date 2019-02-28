@@ -13,15 +13,11 @@ public class Servos
         srvo.set(0);
     }
     public void start(){
-        if (Robot.oi.getXboxController1().getYButtonPressed()){
-            counter++;
-            if ((counter % 2) == 0){
-                srvo.set(0);
-            }
-            else{
-                srvo.set(1);
-            }
+        if(Robot.oi.getServoIn()){
+            srvo.set(0);
         }
-
+        if(Robot.oi.getServoOut()){
+            srvo.set(1);
+        }
     }
 }
