@@ -72,6 +72,7 @@ def Track(frame, sd):
 cap1 = cv2.VideoCapture(0)
 cap2 = cv2.VideoCapture(1)
 #HatchPanel = HatchPanelPipeline()
+team = None
 ntinst = NetworkTablesInstance.getDefault()
 ntinst.startClientTeam(team)
 SmartDashBoardValues = ntinst.getTable('SmartDashboard')
