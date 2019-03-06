@@ -81,7 +81,7 @@ while(True):
     if SmartDashBoardValues.getNumber("Camera to Use", 0):
         ret, frame = cap1.read()                            #use camera 0
         SmartDashBoardValues.putNumber("Using Camera", 0)
-    elif SmartDashBoardValues.getNumber("Camera to Use", 1)
+    elif SmartDashBoardValues.getNumber("Camera to Use", 1):
         ret, frame = cap2.read()                            #use camera 1
         SmartDashBoardValues.putNumber("Using Camera", 1)
     else:
