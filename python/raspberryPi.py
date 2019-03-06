@@ -80,7 +80,7 @@ while(True):
     ret, frame = cap.read()
 
     # Our operations on the frame come here
-    Track(frame, SmartDashBoardValues, ntinst)
+    Track(frame, SmartDashBoardValues)
     cv2.imshow('frame',frame)
     #print(type(mask))
     #res = cv2.bitwise_and(frame,frame, mask=mask) 
