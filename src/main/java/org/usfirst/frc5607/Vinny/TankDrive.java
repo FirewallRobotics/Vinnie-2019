@@ -30,7 +30,7 @@ public class TankDrive
     private NetworkTable table = inst.getTable("SmartDashboard");
     private NetworkTableEntry x = table.getEntry("X");
     private NetworkTableEntry y = table.getEntry("Y");
-    private NetworkTableEntry radius = table.getEntry("Radius");
+    private NetworkTableEntry radius = table.getEntry("R");
 
     private double MaxRadius = 60;
     private double MinRadius = 10;
