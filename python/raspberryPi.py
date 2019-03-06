@@ -13,16 +13,16 @@ def Track(frame, sd):
     Upper = (0,0,0)
     if sd.getNumber("Track", 0):
         Lower= (0,103,105)
-        Upper = (150,255,255) #hatch panel
+        Upper = (150,255,255)           #hatch panel
         sd.putNumber("Tracking", 0)
-    else if sd.getNumber("Track", 1):
-        Lower= (16,18,108)
+    elif sd.getNumber("Track", 1):
+        Lower= (16,18,108)              #Tape
         Upper = (32,52,127)
         sd.putNumber("Tracking", 1)
     else:
         print("Could not get smartdashboard value, using hatch panel")
         Lower= (0,103,105)
-        Upper = (150,255,255)
+        Upper = (150,255,255)           #none selected using hatch
         sd.putNumber("Tracking", 2)
     #frame = cv2.flip(frame, 1)
 
@@ -69,7 +69,8 @@ def Track(frame, sd):
             
     
 
-cap = cv2.VideoCapture(0)
+cap1 = cv2.VideoCapture(0)
+cap2 = cv2.VideoCapture(1)
 #HatchPanel = HatchPanelPipeline()
 ntinst = NetworkTablesInstance.getDefault()
 ntinst.startClientTeam(team)
@@ -77,7 +78,16 @@ SmartDashBoardValues = ntinst.getTable('SmartDashboard')
 
 while(True):
     # Capture frame-by-frame
-    ret, frame = cap.read()
+    if SmartDashBoardValues.getNumber("Camera to Use", 0):
+        ret, frame = cap1.read()                            #use camera 0
+        SmartDashBoardValues.putNumber("Using Camera", 0)
+    elif SmartDashBoardValues.getNumber("Camera to Use", 1)
+        ret, frame = cap2.read()                            #use camera 1
+        SmartDashBoardValues.putNumber("Using Camera", 1)
+    else:
+        print("No camera selected using camera 0")
+        ret, frame = cap1.read()                            #found no value for camera to use, using cam 0
+        SmartDashBoardValues.putNumber("Using Camera", 2)
 
     # Our operations on the frame come here
     Track(frame, SmartDashBoardValues)
@@ -92,5 +102,6 @@ while(True):
         break
 
 # When everything done, release the capture
-cap.release()
+cap1.release()
+cap2.release()
 cv2.destroyAllWindows()
