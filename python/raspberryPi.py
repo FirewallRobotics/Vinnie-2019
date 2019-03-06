@@ -8,21 +8,21 @@ import math
 from networktables import NetworkTablesInstance
 from enum import Enum
 
-def TrackTheHatchPanel(frame, sd):
-    HatchLower= (0,0,0)
-    HatchUpper = (0,0,0)
+def Track(frame, sd):
+    Lower= (0,0,0)
+    Upper = (0,0,0)
     if sd.getNumber("Track", 0):
-        HatchLower= (0,103,105)
-        HatchUpper = (150,255,255) #hatch panel
+        Lower= (0,103,105)
+        Upper = (150,255,255) #hatch panel
         sd.putNumber("Tracking", 0)
     else if sd.getNumber("Track", 1):
-        HatchLower= (16,18,108)
-        HatchUpper = (32,52,127)
+        Lower= (16,18,108)
+        Upper = (32,52,127)
         sd.putNumber("Tracking", 1)
     else:
         print("Could not get smartdashboard value, using hatch panel")
-        HatchLower= (0,103,105)
-        HatchUpper = (150,255,255)
+        Lower= (0,103,105)
+        Upper = (150,255,255)
         sd.putNumber("Tracking", 2)
     #frame = cv2.flip(frame, 1)
 
@@ -33,7 +33,7 @@ def TrackTheHatchPanel(frame, sd):
     #Make a mask for the pixals that meet yhe HSV filter 
     #then run a bunch of dolations and
     #erosions to remove any small blobs still in the mask
-    mask = cv2.inRange(hsv, HatchLower, HatchUpper)
+    mask = cv2.inRange(hsv, Lower, Upper)
     mask = cv2.erode(mask, None, iterations = 2)
     mask = cv2.dilate(mask, None, iterations = 2)
     
@@ -80,7 +80,7 @@ while(True):
     ret, frame = cap.read()
 
     # Our operations on the frame come here
-    TrackTheHatchPanel(frame, SmartDashBoardValues, ntinst)
+    Track(frame, SmartDashBoardValues, ntinst)
     cv2.imshow('frame',frame)
     #print(type(mask))
     #res = cv2.bitwise_and(frame,frame, mask=mask) 
