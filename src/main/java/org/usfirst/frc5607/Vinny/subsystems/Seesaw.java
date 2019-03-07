@@ -101,7 +101,7 @@ public class Seesaw
 				goToPosition(884);
 			}
 			else if (seesawState == 4){
-				goToPosition(812);
+				goToPosition(888);
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
 		}
