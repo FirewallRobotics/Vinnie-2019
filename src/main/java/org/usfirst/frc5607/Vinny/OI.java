@@ -107,7 +107,7 @@ public class OI {
     public Boolean getRSLowerCargo(){
         return xboxController2.getBButton();
     }
-    public Boolean getRSHigherCargo(){
+    public Boolean getRSHigherHatch(){
         return xboxController2.getYButton();
     }
     

@@ -26,13 +26,8 @@ public class Seesaw
  
 		/* Ensure sensor is positive when output is positive */
 		_talon.setSensorPhase(true);
-		_talon.configFactoryDefault();
 		_talon.setNeutralMode(NeutralMode.Brake);
-		//Make sure seesaw will not break gear when it goes to 824 or 812
-		_talon.configForwardSoftLimitThreshold(824);
-		_talon.configForwardSoftLimitEnable(true);
-		_talon.configReverseSoftLimitThreshold(812);
-		_talon.configReverseSoftLimitEnable(true);
+
 		/**
 		 * Set based on what direction you want forward/positive to be.
 		 * This does not affect sensor phase. 
@@ -77,19 +72,19 @@ public class Seesaw
     {
         if(Math.abs(Robot.oi.getJoySpeed())< deadzone){
 
-			if(Robot.oi.getLowerHatch()){
+			if(Robot.oi.getLowerHatch()){ //rocket hatch
 				seesawState = 1;
 			}
-			if(Robot.oi.getHighHatch()){
+			if(Robot.oi.getHighHatch()){ // cargo hatch
 				seesawState = 2;
 			}
 			if(Robot.oi.getCSCargoDeploy()){
-				seesawState = 3;
-			}
-			if(Robot.oi.getRSLowerCargo()){
 				seesawState = 2;
 			}
-			if(Robot.oi.getRSHigherCargo()){
+			if(Robot.oi.getRSLowerCargo()){
+				seesawState = 3;
+			}
+			if(Robot.oi.getRSHigherHatch()){
 				seesawState = 4;
 			}
 
@@ -97,16 +92,16 @@ public class Seesaw
 				_talon.set(ControlMode.PercentOutput, 0);
 			}
 			else if (seesawState == 1) { 
-				goToPosition(817);
+				goToPosition(860);
 			}
 			else if (seesawState == 2) { 
-				goToPosition(824);
+				goToPosition(861);
 			}
 			else if (seesawState == 3){
-				goToPosition(818);
+				goToPosition(884);
 			}
 			else if (seesawState == 4){
-				goToPosition(812);
+				goToPosition(888);
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
 		}
