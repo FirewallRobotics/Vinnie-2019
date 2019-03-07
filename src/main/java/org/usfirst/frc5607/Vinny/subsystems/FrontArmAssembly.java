@@ -6,12 +6,16 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
 public class FrontArmAssembly
 {
   private static OI oi = Robot.oi;
-  WPI_TalonSRX _talon = new WPI_TalonSRX(9);
+  WPI_TalonSRX _talon = new WPI_TalonSRX(7);
   private static Spark _spark = new Spark(0);
+  private SensorCollection pot = _talon.getSensorCollection();
 	public FrontArmAssembly()
     {/* Config the sensor used for Primary PID and sensor direction */
         //_talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
@@ -81,5 +85,6 @@ public class FrontArmAssembly
 		else{
 			_spark.setSpeed(0);
 		}
+		SmartDashboard.putNumber("arm pot", pot.getAnalogIn());
     }
 }
