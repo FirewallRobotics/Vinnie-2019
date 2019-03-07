@@ -1,27 +1,27 @@
-import numpy as np
+#!/usr/bin/env python3
+import json
+import time
+import sys
+#import numpy as np
 import cv2
 
-
-import cv2
-import numpy
-import math
+from cscore import CameraServer, VideoSource, CvSource, VideoMode, CvSink, UsbCamera
 from networktables import NetworkTablesInstance
-from enum import Enum
 
 def Track(frame, sd):
-    Lower= (0,0,0)
+    Lower = (0,0,0)
     Upper = (0,0,0)
     if sd.getNumber("Track", 0):
-        Lower= (0,103,105)
+        Lower = (0,103,105)
         Upper = (150,255,255)           #hatch panel
         sd.putNumber("Tracking", 0)
     elif sd.getNumber("Track", 1):
-        Lower= (16,18,108)              #Tape
+        Lower = (16,18,108)              #Tape
         Upper = (32,52,127)
         sd.putNumber("Tracking", 1)
     else:
         print("Could not get smartdashboard value, using hatch panel")
-        Lower= (0,103,105)
+        Lower = (0,103,105)
         Upper = (150,255,255)           #none selected using hatch
         sd.putNumber("Tracking", 2)
     #frame = cv2.flip(frame, 1)
