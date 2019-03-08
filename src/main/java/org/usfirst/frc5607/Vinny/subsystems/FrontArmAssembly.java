@@ -70,7 +70,7 @@ public class FrontArmAssembly
 		if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>16700){
 			_talon.set(ControlMode.PercentOutput, .3);	
 		}
-		else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()<16500){
+		else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>16500){
 			_talon.set(ControlMode.PercentOutput, .5);}
 		else{
 			_talon.set(ControlMode.PercentOutput, 0);
