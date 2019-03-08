@@ -82,7 +82,7 @@ public class Seesaw
 			}
 			if(Robot.oi.getCSCargoDeploy()){
 				seesawState = 3;
-			}
+			} 
 			if(Robot.oi.getRSLowerCargo()){
 				seesawState = 4;
 			}
@@ -113,7 +113,7 @@ public class Seesaw
 		else{
 			if (Robot.oi.getJoySpeed() > 0)
 			{
-				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -0.2);
+				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -1);
 			}
 			else
 			{
@@ -129,7 +129,7 @@ public class Seesaw
 		SmartDashboard.putNumber("Target Pos", pos);
 		int potvalue = Math.abs(Math.round(pot.getAnalogIn()));
 		if (potvalue < pos){
-			_talon.set(ControlMode.PercentOutput, 0.18);
+			_talon.set(ControlMode.PercentOutput, 0.4);
 		}
 		else if (potvalue > pos){
 			_talon.set(ControlMode.PercentOutput, -1);
