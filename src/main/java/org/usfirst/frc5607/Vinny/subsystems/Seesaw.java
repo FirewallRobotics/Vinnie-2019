@@ -33,7 +33,7 @@ public class Seesaw
 		 * This does not affect sensor phase. 
 		 */ 
 		_talon.setInverted(false);
-
+		goToPosition(799);
 		/* Config the peak and nominal outputs, 12V means full */
 		//_talon.configNominalOutputForward(0,30);
 		//_talon.configNominalOutputReverse(0,30);

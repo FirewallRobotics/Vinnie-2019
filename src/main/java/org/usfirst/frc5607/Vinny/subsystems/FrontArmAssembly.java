@@ -31,7 +31,11 @@ public class FrontArmAssembly
 		 * This does not affect sensor phase. 
 		 */ 
 		_talon.setInverted(true);
-
+		_talon.set(ControlMode.PercentOutput, -0.5);
+		while (pot.getAnalogIn() <865) {
+		_talon.set(ControlMode.PercentOutput, -0.5);
+		} 
+	 _talon.set(ControlMode.PercentOutput, 0);
 		/* Config the peak and nominal outputs, 12V means full */
 		//_talon.configNominalOutputForward(0,30);
 		//_talon.configNominalOutputReverse(0,30);

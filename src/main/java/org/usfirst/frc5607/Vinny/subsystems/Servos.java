@@ -9,8 +9,9 @@ public class Servos
 
     public Servos(){
         counter = 0;
-        srvo = new Servo(1); 
-        srvo.set(0);
+        srvo = new Servo(1);
+        // initialize into up position 
+        srvo.set(1);
     }
     public void start(){
         if(Robot.oi.getServoIn()){
