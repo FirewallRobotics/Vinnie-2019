@@ -67,15 +67,17 @@ public class FrontArmAssembly
     }
     public void start()
     {
-		if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>16700){
+		if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>402){
 			_talon.set(ControlMode.PercentOutput, .3);	
 		}
-		else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>16500){
-			_talon.set(ControlMode.PercentOutput, .5);}
+		else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>145){
+			_talon.set(ControlMode.PercentOutput, .5);
+			_spark.setSpeed(0.5);
+		}
 		else{
 			_talon.set(ControlMode.PercentOutput, 0);
 		}
-		if(Robot.oi.getFrontArmRaise()&& pot.getAnalogIn()<17768){
+		if(Robot.oi.getFrontArmRaise()&& pot.getAnalogIn()<865){
 			_talon.set(ControlMode.PercentOutput, -0.5);
 		}
 		else{

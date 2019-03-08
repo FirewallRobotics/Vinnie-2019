@@ -70,6 +70,8 @@ public class Seesaw
     }
     public void start()
     {
+		// min value is 786
+		// max value is 827
         if(Math.abs(Robot.oi.getJoySpeed())< deadzone){
 
 			if(Robot.oi.getLowerHatch()){ //rocket hatch
@@ -79,34 +81,44 @@ public class Seesaw
 				seesawState = 2;
 			}
 			if(Robot.oi.getCSCargoDeploy()){
-				seesawState = 2;
-			}
-			if(Robot.oi.getRSLowerCargo()){
 				seesawState = 3;
 			}
-			if(Robot.oi.getRSHigherHatch()){
+			if(Robot.oi.getRSLowerCargo()){
 				seesawState = 4;
+			}
+			if(Robot.oi.getRSHigherHatch()){
+				seesawState = 5;
 			}
 
 			if (seesawState == 0) {
 				_talon.set(ControlMode.PercentOutput, 0);
 			}
 			else if (seesawState == 1) { 
-				goToPosition(860);
+				goToPosition(799);
 			}
 			else if (seesawState == 2) { 
-				goToPosition(861);
+				goToPosition(799);
 			}
 			else if (seesawState == 3){
-				goToPosition(884);
+				goToPosition(803);
 			}
 			else if (seesawState == 4){
-				goToPosition(888);
+				goToPosition(820);
+			}
+			else if (seesawState == 5){
+				goToPosition(816);
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
 		}
 		else{
-			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -0.2);
+			if (Robot.oi.getJoySpeed() > 0)
+			{
+				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -0.2);
+			}
+			else
+			{
+				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed());
+			}
 			seesawState = 0;
 		}
 		SmartDashboard.putNumber("pot value", Math.abs(pot.getAnalogIn()));
@@ -117,10 +129,10 @@ public class Seesaw
 		SmartDashboard.putNumber("Target Pos", pos);
 		int potvalue = Math.abs(Math.round(pot.getAnalogIn()));
 		if (potvalue < pos){
-			_talon.set(ControlMode.PercentOutput, 0.1);
+			_talon.set(ControlMode.PercentOutput, 0.18);
 		}
 		else if (potvalue > pos){
-			_talon.set(ControlMode.PercentOutput, -0.1);
+			_talon.set(ControlMode.PercentOutput, -1);
 		}
 		else {
 			_talon.set(ControlMode.PercentOutput, 0);
