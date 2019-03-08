@@ -118,7 +118,7 @@ public class Seesaw
 			}
 			else
 			{
-				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * .5);
+				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
 			}
 			seesawState = 0;
 			lastmode = 1;
