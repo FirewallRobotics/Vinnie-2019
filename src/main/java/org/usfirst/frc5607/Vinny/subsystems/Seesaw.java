@@ -108,7 +108,7 @@ public class Seesaw
 				targetPosition = manualpos;				
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
-			goToPosition(targetPosition, 0.3);
+			goToPosition(targetPosition, 0.1);
 		}
 		else{
 			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
