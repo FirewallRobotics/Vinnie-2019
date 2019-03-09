@@ -122,14 +122,20 @@ public class Seesaw
 		//_talon.setSelectedSensorPosition(840, 0, 30);\
 		SmartDashboard.putNumber("Target Pos", pos);
 		int potvalue = Math.abs(Math.round(pot.getAnalogIn()));
-		if (potvalue < pos){
-			_talon.set(ControlMode.PercentOutput, speed);
+		if (potvalue > _minTravel && potvalue < _maxTravel)
+		{
+			if (potvalue < pos){
+				_talon.set(ControlMode.PercentOutput, speed);
+			}
+			else if (potvalue > pos){
+				_talon.set(ControlMode.PercentOutput, -speed);
+			}
+			else {
+				speed = 0.15;
+				_talon.set(ControlMode.PercentOutput, 0);
+			}
 		}
-		else if (potvalue > pos){
-			_talon.set(ControlMode.PercentOutput, -speed);
-		}
-		else {
-			speed = 0.15;
+		else{
 			_talon.set(ControlMode.PercentOutput, 0);
 		}
 	}
