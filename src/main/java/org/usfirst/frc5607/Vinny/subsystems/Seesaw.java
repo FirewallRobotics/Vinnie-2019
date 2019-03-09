@@ -25,7 +25,7 @@ public class Seesaw
 	private int _csCargo      = 803;
 	private int _rsCargoLow   = 820;
 	private int _rsHatchMid   = 816;
-	private int targetPosition = _csHatch; /* Initialize in _csHatch Position */
+	private int targetPosition = _csCargo; /* Initialize in _csHatch Position */
 	public Seesaw()
     {
 		_talon.configFactoryDefault();
@@ -108,10 +108,10 @@ public class Seesaw
 				targetPosition = manualpos;				
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
-			goToPosition(targetPosition, 0.1);
+			goToPosition(targetPosition, 0.08);
 		}
 		else{
-			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
+			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.3);
 			seesawState = 0;
 			manualpos = Math.round(pot.getAnalogIn());
 		}
