@@ -17,8 +17,15 @@ public class Seesaw
 	private byte seesawState = 0;
 	private SensorCollection pot = _talon.getSensorCollection();
 	private Double deadzone = 0.15;
-	private byte lastmode = 0;
 	private int manualpos = 0;
+	private int _minTravel    = 786;
+	private int _maxTravel    = 827;
+	private int _rsHatchLow   = 799;
+	private int _csHatch      = _rsHatchLow; /* Same as _rocketHatch now */
+	private int _csCargo      = 803;
+	private int _rsCargoLow   = 820;
+	private int _rsHatchMid   = 816;
+	private int targetPosition = _csHatch; /* Initialize in _csHatch Position */
 	public Seesaw()
     {
 		_talon.configFactoryDefault();
@@ -79,49 +86,33 @@ public class Seesaw
         if(Math.abs(Robot.oi.getJoySpeed())< deadzone){
 			if(Robot.oi.getLowerHatch()){ //rocket hatch
 				seesawState = 1;
-				goToPosition(799, 0.3);
-				lastmode = 0;
+				targetPosition = _rsHatchLow;
 			}
 			if(Robot.oi.getHighHatch()){ // cargo hatch
 				seesawState = 2;
-				goToPosition(799, 0.3);
-				lastmode = 0;
+				targetPosition = _csHatch;
 			}
 			if(Robot.oi.getCSCargoDeploy()){
 				seesawState = 3;
-				goToPosition(803, 0.3);
-				lastmode = 0;
+				targetPosition = _csCargo;
 			} 
 			if(Robot.oi.getRSLowerCargo()){
 				seesawState = 4;
-				goToPosition(820, 0.3);
-				lastmode = 0;
+				targetPosition = _csCargo;
 			}
 			if(Robot.oi.getRSHigherHatch()){
 				seesawState = 5;
-				goToPosition(816, 0.3);
-				lastmode = 0;
+				targetPosition = _rsHatchMid;
 			}
-			if(lastmode == 1){
-				goToPosition(manualpos, 0.15);
-			}
-
 			if (seesawState == 0) {
-				_talon.set(ControlMode.PercentOutput, 0);
+				targetPosition = manualpos;				
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
+			goToPosition(targetPosition, 0.3);
 		}
 		else{
-			if (Robot.oi.getJoySpeed() > 0)
-			{
-				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
-			}
-			else
-			{
-				_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
-			}
+			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
 			seesawState = 0;
-			lastmode = 1;
 			manualpos = Math.round(pot.getAnalogIn());
 		}
 		SmartDashboard.putNumber("pot value", Math.abs(pot.getAnalogIn()));
