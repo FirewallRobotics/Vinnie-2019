@@ -26,6 +26,12 @@ public class FrontArmAssembly
 		_talon.setSensorPhase(true);
 		_talon.configFactoryDefault();
 		_talon.setNeutralMode(NeutralMode.Brake);
+		_talon.setInverted(true);
+		_talon.set(ControlMode.PercentOutput, -0.5);
+		while (pot.getAnalogIn() <865) {
+		_talon.set(ControlMode.PercentOutput, -0.5);
+		} 
+	 _talon.set(ControlMode.PercentOutput, 0);
 		/**
 		 * Set based on what direction you want forward/positive to be.
 		 * This does not affect sensor phase. 

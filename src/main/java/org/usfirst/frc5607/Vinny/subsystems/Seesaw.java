@@ -98,7 +98,7 @@ public class Seesaw
 			} 
 			if(Robot.oi.getRSLowerCargo()){
 				seesawState = 4;
-				targetPosition = _csCargo;
+				targetPosition = _rsCargoLow;
 			}
 			if(Robot.oi.getRSHigherHatch()){
 				seesawState = 5;
