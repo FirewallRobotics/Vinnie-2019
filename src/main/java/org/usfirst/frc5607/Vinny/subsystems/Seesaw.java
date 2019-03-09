@@ -17,8 +17,18 @@ public class Seesaw
 	private byte seesawState = 0;
 	private SensorCollection pot = _talon.getSensorCollection();
 	private Double deadzone = 0.15;
+	private int manualpos = 0;
+	private int _minTravel    = 786;
+	private int _maxTravel    = 827;
+	private int _rsHatchLow   = 799;
+	private int _csHatch      = _rsHatchLow; /* Same as _rocketHatch now */
+	private int _csCargo      = 803;
+	private int _rsCargoLow   = 820;
+	private int _rsHatchMid   = 816;
+	private int targetPosition = _csHatch; /* Initialize in _csHatch Position */
 	public Seesaw()
     {
+		_talon.configFactoryDefault();
 		/* Config the sensor used for Primary PID and sensor direction */
         //_talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
          //                                   0,
@@ -27,6 +37,7 @@ public class Seesaw
 		/* Ensure sensor is positive when output is positive */
 		_talon.setSensorPhase(true);
 		_talon.setNeutralMode(NeutralMode.Brake);
+
 
 		/**
 		 * Set based on what direction you want forward/positive to be.
@@ -70,59 +81,55 @@ public class Seesaw
     }
     public void start()
     {
+		// min value is 786
+		// max value is 827
         if(Math.abs(Robot.oi.getJoySpeed())< deadzone){
-
 			if(Robot.oi.getLowerHatch()){ //rocket hatch
 				seesawState = 1;
+				targetPosition = _rsHatchLow;
 			}
 			if(Robot.oi.getHighHatch()){ // cargo hatch
 				seesawState = 2;
+				targetPosition = _csHatch;
 			}
 			if(Robot.oi.getCSCargoDeploy()){
-				seesawState = 2;
-			}
-			if(Robot.oi.getRSLowerCargo()){
 				seesawState = 3;
+				targetPosition = _csCargo;
+			} 
+			if(Robot.oi.getRSLowerCargo()){
+				seesawState = 4;
+				targetPosition = _rsCargoLow;
 			}
 			if(Robot.oi.getRSHigherHatch()){
-				seesawState = 4;
+				seesawState = 5;
+				targetPosition = _rsHatchMid;
 			}
-
 			if (seesawState == 0) {
-				_talon.set(ControlMode.PercentOutput, 0);
-			}
-			else if (seesawState == 1) { 
-				goToPosition(860);
-			}
-			else if (seesawState == 2) { 
-				goToPosition(861);
-			}
-			else if (seesawState == 3){
-				goToPosition(884);
-			}
-			else if (seesawState == 4){
-				goToPosition(888);
+				targetPosition = manualpos;				
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
+			goToPosition(targetPosition, 0.3);
 		}
 		else{
-			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -0.2);
+			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
 			seesawState = 0;
+			manualpos = Math.round(pot.getAnalogIn());
 		}
 		SmartDashboard.putNumber("pot value", Math.abs(pot.getAnalogIn()));
 	}
 	
-	public void goToPosition(int pos) {
+	public void goToPosition(int pos, double speed) {
 		//_talon.setSelectedSensorPosition(840, 0, 30);\
 		SmartDashboard.putNumber("Target Pos", pos);
 		int potvalue = Math.abs(Math.round(pot.getAnalogIn()));
 		if (potvalue < pos){
-			_talon.set(ControlMode.PercentOutput, 0.1);
+			_talon.set(ControlMode.PercentOutput, speed);
 		}
 		else if (potvalue > pos){
-			_talon.set(ControlMode.PercentOutput, -0.1);
+			_talon.set(ControlMode.PercentOutput, -speed);
 		}
 		else {
+			speed = 0.15;
 			_talon.set(ControlMode.PercentOutput, 0);
 		}
 	}

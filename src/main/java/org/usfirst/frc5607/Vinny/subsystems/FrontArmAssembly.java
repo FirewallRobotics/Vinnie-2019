@@ -26,11 +26,17 @@ public class FrontArmAssembly
 		_talon.setSensorPhase(true);
 		_talon.configFactoryDefault();
 		_talon.setNeutralMode(NeutralMode.Brake);
+		_talon.setInverted(true);
+		_talon.set(ControlMode.PercentOutput, -0.5);
+		while (pot.getAnalogIn() <865) {
+		_talon.set(ControlMode.PercentOutput, -0.5);
+		} 
+	 _talon.set(ControlMode.PercentOutput, 0);
 		/**
 		 * Set based on what direction you want forward/positive to be.
 		 * This does not affect sensor phase. 
 		 */ 
-		_talon.setInverted(false);
+		_talon.setInverted(true);
 
 		/* Config the peak and nominal outputs, 12V means full */
 		//_talon.configNominalOutputForward(0,30);
@@ -67,13 +73,17 @@ public class FrontArmAssembly
     }
     public void start()
     {
-		if(Robot.oi.getFrontArmLower()){
+		if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>402){
+			_talon.set(ControlMode.PercentOutput, .3);	
+		}
+		else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>145){
 			_talon.set(ControlMode.PercentOutput, .5);
+			_spark.setSpeed(0.5);
 		}
 		else{
 			_talon.set(ControlMode.PercentOutput, 0);
 		}
-		if(Robot.oi.getFrontArmRaise()){
+		if(Robot.oi.getFrontArmRaise()&& pot.getAnalogIn()<865){
 			_talon.set(ControlMode.PercentOutput, -0.5);
 		}
 		else{
