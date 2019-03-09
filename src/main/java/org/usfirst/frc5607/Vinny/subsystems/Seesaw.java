@@ -25,7 +25,7 @@ public class Seesaw
 	private int _csCargo      = 803;
 	private int _rsCargoLow   = 820;
 	private int _rsHatchMid   = 816;
-	private int targetPosition = _csHatch; /* Initialize in _csHatch Position */
+	private int targetPosition = _csCargo; /* Initialize in _csHatch Position */
 	public Seesaw()
     {
 		_talon.configFactoryDefault();
@@ -108,10 +108,10 @@ public class Seesaw
 				targetPosition = manualpos;				
 			}
 			SmartDashboard.putNumber("seesaw state", seesawState);
-			goToPosition(targetPosition, 0.1);
+			goToPosition(targetPosition, 0.08);
 		}
 		else{
-			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
+			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.3);
 			seesawState = 0;
 			manualpos = Math.round(pot.getAnalogIn());
 		}
@@ -122,14 +122,20 @@ public class Seesaw
 		//_talon.setSelectedSensorPosition(840, 0, 30);\
 		SmartDashboard.putNumber("Target Pos", pos);
 		int potvalue = Math.abs(Math.round(pot.getAnalogIn()));
-		if (potvalue < pos){
-			_talon.set(ControlMode.PercentOutput, speed);
+		if (potvalue >= _minTravel && potvalue <= _maxTravel)
+		{
+			if (potvalue < pos){
+				_talon.set(ControlMode.PercentOutput, speed);
+			}
+			else if (potvalue > pos){
+				_talon.set(ControlMode.PercentOutput, -speed);
+			}
+			else {
+				speed = 0.15;
+				_talon.set(ControlMode.PercentOutput, 0);
+			}
 		}
-		else if (potvalue > pos){
-			_talon.set(ControlMode.PercentOutput, -speed);
-		}
-		else {
-			speed = 0.15;
+		else{
 			_talon.set(ControlMode.PercentOutput, 0);
 		}
 	}
