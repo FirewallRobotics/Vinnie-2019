@@ -18,13 +18,13 @@ public class Seesaw
 	private SensorCollection pot = _talon.getSensorCollection();
 	private Double deadzone = 0.15;
 	private int manualpos = 0;
-	private int _minTravel    = 786;
-	private int _maxTravel    = 827;
-	private int _rsHatchLow   = 799;
+	private int _minTravel    = 782;
+	private int _maxTravel    = 828;
+	private int _rsHatchLow   = _minTravel + 13;
 	private int _csHatch      = _rsHatchLow; /* Same as _rocketHatch now */
-	private int _csCargo      = 803;
-	private int _rsCargoLow   = 820;
-	private int _rsHatchMid   = 816;
+	private int _csCargo      = _minTravel + 17;
+	private int _rsCargoLow   = _minTravel + 34;
+	private int _rsHatchMid   = _minTravel + 30;
 	private int targetPosition = _csHatch; /* Initialize in _csHatch Position */
 	public Seesaw()
     {
@@ -44,6 +44,7 @@ public class Seesaw
 		 * This does not affect sensor phase. 
 		 */ 
 		_talon.setInverted(false);
+		manualpos = _csHatch;
 
 		/* Config the peak and nominal outputs, 12V means full */
 		//_talon.configNominalOutputForward(0,30);
