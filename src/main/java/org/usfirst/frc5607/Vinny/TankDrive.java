@@ -67,7 +67,7 @@ public class TankDrive
         Double rJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kRight);
         if(Math.abs(lJoystickSpeed) > deadZone) 
 		{
-            lJoystickSpeed = -(lJoystickSpeed * 0.40);
+            lJoystickSpeed = -(lJoystickSpeed * 0.60);
             if (Math.abs(lJoystickSpeed - previousLeftReading) > 0.06) {
                 if (lJoystickSpeed > previousLeftReading) {
                     lJoystickSpeed = previousLeftReading += 0.05;
@@ -87,7 +87,7 @@ public class TankDrive
 		//Sets Speed For Right Drive Motors
 		if(Math.abs(rJoystickSpeed) > deadZone) 
 		{
-            rJoystickSpeed = rJoystickSpeed * 0.40;
+            rJoystickSpeed = rJoystickSpeed * 0.60;
             if (Math.abs(rJoystickSpeed - previousRightReading) > 0.06) {
                 if (rJoystickSpeed > previousRightReading) {
                     rJoystickSpeed = previousRightReading += 0.05;

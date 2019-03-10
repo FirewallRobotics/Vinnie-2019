@@ -28,9 +28,9 @@ public class FrontArmAssembly
 		_talon.setNeutralMode(NeutralMode.Brake);
 		_talon.setInverted(true);
 		_talon.set(ControlMode.PercentOutput, -0.5);
-		while (pot.getAnalogIn() <865) {
+		/*while (pot.getAnalogIn() <865) {
 		_talon.set(ControlMode.PercentOutput, -0.5);
-		} 
+		}*/ 
 	 _talon.set(ControlMode.PercentOutput, 0);
 		/**
 		 * Set based on what direction you want forward/positive to be.
@@ -73,26 +73,45 @@ public class FrontArmAssembly
     }
     public void start()
     {
-		if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>402){
-			_talon.set(ControlMode.PercentOutput, .3);	
+			// BAck position - 538
+			// position 2 - 133
+			// position 3 - -145
+			// down - -300
+		/*if (Robot.oi.getFrontArmLower() && pot.getAnalogIn() <= -1540)
+		{
+			_talon.set(ControlMode.PercentOutput, 0);
+			SmartDashboard.putString("Arm Going", "Nowhere");
 		}
-		else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>145){
-			_talon.set(ControlMode.PercentOutput, .5);
-			_spark.setSpeed(0.5);
+	  else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>-145){
+			_talon.set(ControlMode.PercentOutput, .53);	
+			SmartDashboard.putString("Arm Going", "Slow Forward");
+		}
+		else if(Robot.oi.getFrontArmLower()&& pot.getAnalogIn()>-145){
+			_talon.set(ControlMode.PercentOutput, .67);
+			_spark.setSpeed(-0.5);
+			SmartDashboard.putString("Arm Going", "Full");
+		}
+		else if(Robot.oi.getFrontArmRaise()&& pot.getAnalogIn()<432){
+			_talon.set(ControlMode.PercentOutput, -0.5);
+			SmartDashboard.putString("Arm Going", "Backward");
 		}
 		else{
 			_talon.set(ControlMode.PercentOutput, 0);
-		}
-		if(Robot.oi.getFrontArmRaise()&& pot.getAnalogIn()<865){
+			SmartDashboard.putString("Arm Going", "Stopped");
+		}*/
+		if (Robot.oi.getFrontArmRaise()) {
 			_talon.set(ControlMode.PercentOutput, -0.5);
 		}
-		else{
+		else if (Robot.oi.getFrontArmLower()) {
+			_talon.set(ControlMode.PercentOutput, 0.53);
+		}
+		else {
 			_talon.set(ControlMode.PercentOutput, 0);
 		}
-		if(Robot.oi.getFrontArmSpin()){
-			_spark.setSpeed(0.5);
+		if (Robot.oi.getFrontArmSpin()) {
+			_spark.setSpeed(0.7);
 		}
-		else{
+		else {
 			_spark.setSpeed(0);
 		}
 		SmartDashboard.putNumber("arm pot", pot.getAnalogIn());
