@@ -25,6 +25,7 @@ public class TankDrive
     // Previous Joystick readings to help prevent jerkiness
     private Double previousLeftReading = 0.0;
     private Double previousRightReading = 0.0;
+    private Double speedScaleFactor = 0.75;
 
     private NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private NetworkTable table = inst.getTable("SmartDashboard");
@@ -67,7 +68,7 @@ public class TankDrive
         Double rJoystickSpeed = oi.getXboxController1().getY(GenericHID.Hand.kRight);
         if(Math.abs(lJoystickSpeed) > deadZone) 
 		{
-            lJoystickSpeed = -(lJoystickSpeed * 0.60);
+            lJoystickSpeed = -(lJoystickSpeed * speedScaleFactor);
             if (Math.abs(lJoystickSpeed - previousLeftReading) > 0.06) {
                 if (lJoystickSpeed > previousLeftReading) {
                     lJoystickSpeed = previousLeftReading += 0.05;
@@ -87,7 +88,7 @@ public class TankDrive
 		//Sets Speed For Right Drive Motors
 		if(Math.abs(rJoystickSpeed) > deadZone) 
 		{
-            rJoystickSpeed = rJoystickSpeed * 0.60;
+            rJoystickSpeed = rJoystickSpeed * speedScaleFactor;
             if (Math.abs(rJoystickSpeed - previousRightReading) > 0.06) {
                 if (rJoystickSpeed > previousRightReading) {
                     rJoystickSpeed = previousRightReading += 0.05;
