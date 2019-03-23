@@ -27,7 +27,8 @@ public class Seesaw
 	private int _rsHatchMid   = _minTravel + 30;
 	private int targetPosition = _csHatch; /* Initialize in _csHatch Position */
 	public Seesaw()
-    {_minTravel=Math.round(pot.getAnalogIn());
+    {
+			_minTravel=Math.round(pot.getAnalogIn());
 		_talon.configFactoryDefault();
 		/* Config the sensor used for Primary PID and sensor direction */
         //_talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
