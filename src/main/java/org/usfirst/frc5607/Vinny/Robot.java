@@ -42,7 +42,8 @@ public class Robot extends TimedRobot {
     public static Compressor com;
     public static Pneumatic pneu;
     public static DoubleSolenoid firstSolenoid;
-    public static Servos srvoTest;
+    public static DoubleSolenoid secondSolenoid;
+    public static HatchAssembly hatch;
     public static FrontArmAssembly faa;
     public static BasketAssembly basket;
     public static Seesaw saw;
@@ -72,7 +73,7 @@ public class Robot extends TimedRobot {
         tDrive = new TankDrive();
         firstSolenoid = new DoubleSolenoid(0, 1);
         pneu = new Pneumatic();  
-        srvoTest = new Servos();
+        hatch = new HatchAssembly();
         faa = new FrontArmAssembly();
         basket = new BasketAssembly();
         saw = new Seesaw();
@@ -139,7 +140,7 @@ public class Robot extends TimedRobot {
     private void commonPeriodic() {
         Scheduler.getInstance().run();
         tDrive.Drive();
-        srvoTest.start();
+        //srvoTest.start();
         faa.start();
         basket.start();
         saw.start();
