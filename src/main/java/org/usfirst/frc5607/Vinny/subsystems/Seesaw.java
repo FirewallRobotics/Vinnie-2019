@@ -18,8 +18,8 @@ public class Seesaw
 	private SensorCollection pot = _talon.getSensorCollection();
 	private Double deadzone = 0.15;
 	private int manualpos = 0;
-	private int _minTravel    = 782;
-	private int _maxTravel    = 828;
+	private int _minTravel   = 782;
+	private int _maxTravel    = _minTravel + 46;
 	private int _rsHatchLow   = _minTravel + 13;
 	private int _csHatch      = _rsHatchLow; /* Same as _rocketHatch now */
 	private int _csCargo      = _minTravel + 17;
@@ -27,7 +27,7 @@ public class Seesaw
 	private int _rsHatchMid   = _minTravel + 30;
 	private int targetPosition = _csHatch; /* Initialize in _csHatch Position */
 	public Seesaw()
-    {
+    {_minTravel=Math.round(pot.getAnalogIn());
 		_talon.configFactoryDefault();
 		/* Config the sensor used for Primary PID and sensor direction */
         //_talon.configSelectedFeedbackSensor(FeedbackDevice.Analog, 
