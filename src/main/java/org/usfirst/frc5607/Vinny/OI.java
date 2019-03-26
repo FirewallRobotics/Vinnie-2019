@@ -90,6 +90,12 @@ public class OI {
     public Boolean getFrontArmSpin(){
         return xboxController1.getBumper(GenericHID.Hand.kLeft);
     }
+    public Boolean getLowerHandle(){
+        return xboxController1.getStickButtonPressed(GenericHID.Hand.kRight);
+    }
+    public Boolean getRaiseHandle(){
+        return xboxController1.getStickButtonPressed(GenericHID.Hand.kLeft);
+    }        
 
     //Second Controller
     public Double getJoySpeed(){
