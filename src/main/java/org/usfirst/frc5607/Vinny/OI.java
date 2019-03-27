@@ -69,10 +69,10 @@ public class OI {
     public XboxController gXboxController2(){
         return xboxController2;
     }
-    public Boolean getServoIn(){
+    public Boolean getHatchRetract(){
         return xboxController1.getAButton();
     }
-    public Boolean getServoOut(){
+    public Boolean getHatchExpand(){
         return xboxController1.getBButton();
     }
     public Boolean getBasketDump(){
