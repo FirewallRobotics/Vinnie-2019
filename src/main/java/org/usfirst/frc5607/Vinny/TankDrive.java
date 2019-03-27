@@ -25,7 +25,7 @@ public class TankDrive
     // Previous Joystick readings to help prevent jerkiness
     private Double previousLeftReading = 0.0;
     private Double previousRightReading = 0.0;
-    private Double speedScaleFactor = 0.75;
+    public Double speedScaleFactor = 0.75;
 
     private NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private NetworkTable table = inst.getTable("SmartDashboard");

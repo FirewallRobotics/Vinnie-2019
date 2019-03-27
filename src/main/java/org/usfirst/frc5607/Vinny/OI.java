@@ -116,6 +116,9 @@ public class OI {
     public Boolean getRSHigherHatch(){
         return xboxController2.getYButton();
     }
+    public Boolean getLiftState(){
+        return xboxController2.getXButton();
+    }
     
     
     
