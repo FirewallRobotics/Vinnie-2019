@@ -117,7 +117,7 @@ public class OI {
         return xboxController2.getYButton();
     }
     public Boolean getLiftState(){
-        return xboxController2.getXButton();
+        return xboxController2.getXButtonPressed();
     }
     
     
