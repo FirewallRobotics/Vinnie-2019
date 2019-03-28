@@ -145,5 +145,6 @@ public class Robot extends TimedRobot {
         faa.start();
         basket.start();
         saw.start();
+        hatch.start();
     }
 }
