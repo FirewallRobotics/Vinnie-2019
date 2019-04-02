@@ -19,10 +19,10 @@ public class BasketAssembly
         
     }
     public void lowerHandle() {
-        srvo.set(0);
+        srvo.set(0.6);
     } 
     public void raiseHandle() {
-        srvo.set(0.5);
+        srvo.set(0);
     }
 
     public void raise()

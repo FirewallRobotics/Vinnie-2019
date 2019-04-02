@@ -109,7 +109,7 @@ public class FrontArmAssembly
 			_talon.set(ControlMode.PercentOutput, 0);
 		}
 		if (Robot.oi.getFrontArmSpin()) {
-			_spark.setSpeed(1);
+			_spark.setSpeed(-1);
 		}
 		else {
 			_spark.setSpeed(0);

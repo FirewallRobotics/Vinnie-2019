@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
         camera.setFPS(30);
         tDrive = new TankDrive();
         firstSolenoid = new DoubleSolenoid(0, 1);
-        secondSolenoid = new DoubleSolenoid(2, 3);
+        secondSolenoid = new DoubleSolenoid(4, 5);
         pneu = new Pneumatic();  
         hatch = new HatchAssembly();
         faa = new FrontArmAssembly();

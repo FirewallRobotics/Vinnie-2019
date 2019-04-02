@@ -112,7 +112,7 @@ public class Seesaw
 			goToPosition(targetPosition, 0.1);
 		}
 		else{
-			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.5);
+			_talon.set(ControlMode.PercentOutput, Robot.oi.getJoySpeed() * -.4);
 			seesawState = 0;
 			manualpos = Math.round(pot.getAnalogIn());
 		}
