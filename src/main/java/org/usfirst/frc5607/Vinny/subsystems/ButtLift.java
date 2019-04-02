@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import org.usfirst.frc5607.Vinny.OI;
 
 public class ButtLift{
-    private static DoubleSolenoid liftSol = new DoubleSolenoid(4,5);
+    private static DoubleSolenoid liftSol = new DoubleSolenoid(2,3);
     private OI oi = Robot.oi;
     private byte state = 0;
     
