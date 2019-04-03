@@ -1,29 +1,69 @@
 <xml version="1.0">
 <dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="347" y="4"/>
+		<width>533</width>
+		<height>437</height>
+		<property name="Camera Choice" value="USB Camera 0"/>
+	</static-widget>
+	<widget field="Arm Going" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="19" y="21"/>
+	</widget>
+	<widget field="arm pot value" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="16" y="52"/>
+	</widget>
+	<widget field="pot value" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="12" y="169"/>
+	</widget>
+	<widget field="seesaw state" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="20" y="145"/>
+	</widget>
+	<widget field="Output C" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="20" y="116"/>
+	</widget>
+	<widget field="X" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="69" y="84"/>
+		<width>102</width>
+	</widget>
+	<widget field="Y" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="101" y="387"/>
+	</widget>
+	<widget field="R" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="97" y="366"/>
+	</widget>
+	<widget field="GettingFrameData" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="10" y="347"/>
+	</widget>
+	<widget field="PotentiometerTwo" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="8" y="327"/>
+	</widget>
+	<widget field="Potentiometer2" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="13" y="305"/>
+	</widget>
 	<widget field="Potentiometer" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="0" y="284"/>
+		<location x="18" y="284"/>
 	</widget>
 	<widget field="Auto Selector" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="21" y="263"/>
 	</widget>
 	<widget field="Drivetrain" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
-		<location x="27" y="242"/>
+		<location x="39" y="241"/>
 	</widget>
 	<widget field="Auto mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
 		<location x="0" y="257"/>
 	</widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="0" y="242"/>
-	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.MjpgStreamViewerImpl">
-		<location x="0" y="121"/>
-		<property name="MJPG Server URL" value="http://frcvision.local:1182/stream.mjpg"/>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.MjpgStreamViewerImpl">
-		<location x="0" y="0"/>
-		<property name="Degrees Rotation" value="180"/>
+		<location x="884" y="2"/>
+		<width>475</width>
+		<height>436</height>
 		<property name="MJPG Server URL" value="http://frcvision.local:1181/stream.mjpg"/>
 	</static-widget>
+	<widget field="Target Pos" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="10" y="214"/>
+	</widget>
+	<widget field="arm pot" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="13" y="192"/>
+	</widget>
 </dashboard>
 <live-window>
 </live-window>
