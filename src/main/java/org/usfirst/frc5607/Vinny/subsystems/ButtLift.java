@@ -24,7 +24,7 @@ public class ButtLift{
             liftSol.set(DoubleSolenoid.Value.kForward);
         }
         else{
-            Robot.tDrive.speedScaleFactor = .75;
+            Robot.tDrive.speedScaleFactor = .80;
             liftSol.set(DoubleSolenoid.Value.kReverse);
         }
     }

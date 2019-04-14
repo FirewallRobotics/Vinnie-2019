@@ -91,10 +91,10 @@ public class OI {
         return xboxController1.getBumper(GenericHID.Hand.kLeft);
     }
     public Boolean getLowerHandle(){
-        return xboxController1.getStickButtonPressed(GenericHID.Hand.kRight);
+        return xboxController1.getStickButtonPressed(GenericHID.Hand.kLeft);
     }
     public Boolean getRaiseHandle(){
-        return xboxController1.getStickButtonPressed(GenericHID.Hand.kLeft);
+        return xboxController1.getStickButtonPressed(GenericHID.Hand.kRight);
     }        
 
     //Second Controller

@@ -19,10 +19,10 @@ public class BasketAssembly
         
     }
     public void lowerHandle() {
-        srvo.set(0.6);
+        srvo.set(0.4);
     } 
     public void raiseHandle() {
-        srvo.set(0);
+        srvo.set(1);
     }
 
     public void raise()
@@ -31,7 +31,7 @@ public class BasketAssembly
     }
     public void start(){
         if (Robot.oi.getBasketDump()){
-            lowerHandle();
+            raiseHandle();
             dump();
         }
         if (Robot.oi.getBasketRaise()){

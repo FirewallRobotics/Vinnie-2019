@@ -44,7 +44,7 @@ public class Seesaw
 		 * This does not affect sensor phase. 
 		 */ 
 		_talon.setInverted(false);
-		manualpos = _csHatch;
+		manualpos = pot.getAnalogIn();
 
 		/* Config the peak and nominal outputs, 12V means full */
 		//_talon.configNominalOutputForward(0,30);
